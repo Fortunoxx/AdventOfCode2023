@@ -21,14 +21,21 @@
 # import day04
 # import day03
 # import day02
-# import day01
+import day01
 import sys
 sys.path.append('src/puzzle')
 import puzzle
 
-def getFileInfo(day, key="input"):
-    return {"key": key, "file": f"src/data/day{day}.input.dat"}
-    # return {"key": key, "file": f"test/data/day{day}.sample.dat"}
+test = 0
+
+def getFileInfo(day, key="input", has_extra_file=False):
+    suffix = ""
+    if has_extra_file == True:
+        suffix = "-2"
+    if test == 0:
+        return {"key": key, "file": f"src/data/day{day}.input.dat"}
+    else:
+        return {"key": key, "file": f"test/data/day{day}.sample{suffix}.dat"}
 
 # use beautiful colors
 W  = '\033[0m'  # white (normal)
@@ -46,14 +53,17 @@ for i in range(24):
         day = "0" + day
     print(f"{W}Day {day}: fetching puzzle data...")
     (fileName, skipped) = puzzle.FetchForDay(day)
-    print(f"{W}Day {day}: {G}fetching complete: {fileName} (Skipped: {O}{skipped}{G})")
+    suffix = ""
+    if skipped == True: 
+        suffix = f"{O} | skipped{G}"
+    print(f"{W}Day {day}: {G}fetching complete: {fileName}{suffix}")
 
 print(f"{P}")
 print(f"--- Solving puzzles now ---")
 print(f"{G}")
 
-# print(f"{W}Day {O}01{W}: Part {O}1: {G}{day01.solve_part1(getFileInfo('01'))}")
-# print(f"{W}Day {O}01{W}: Part {O}2: {G}{day01.solve_part2(getFileInfo('01'))}")
+print(f"{W}Day {O}01{W}: Part {O}1: {G}{day01.solve_part1(getFileInfo('01'))}")
+print(f"{W}Day {O}01{W}: Part {O}2: {G}{day01.solve_part2(getFileInfo('01', has_extra_file=True))}")
 # print(f"{W}Day {O}02{W}: Part {O}1: {G}{day02.solve_part1(getFileInfo('02'))}")
 # print(f"{W}Day {O}02{W}: Part {O}2: {G}{day02.solve_part2(getFileInfo('02'))}")
 # print(f"{W}Day {O}03{W}: Part {O}1: {G}{day03.solve_part1(getFileInfo('03'))}")
