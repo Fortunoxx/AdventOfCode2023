@@ -1,0 +1,13 @@
+# ignore personalized data
+cookie.txt
+src/data
+
+# ignore pycache
+__pycache__
+
+# ignore codecov output files
+.coverage
+
+# ignore test implementations and templates
+day__.py
+day*-*.py
