@@ -58,29 +58,6 @@ def convert_text_to_numbers(line):
     return new
                 
 
-    # start = True
-    # replacers = {}
-    # while start or len(replacers) > 0:
-    #     start = False
-
-    #     if len(replacers) > 0:
-    #         i = None
-    #         x = None
-    #         for (idx, (k, v)) in replacers.items():
-    #             if i is None or i > idx:
-    #                 i = idx
-    #                 x = (k, v)
-
-    #         (key, value) = x
-    #         line = line.replace(key, str(value), 1)
-    #         replacers = {}
-
-    #     for (key, value) in items:
-    #         if key in line:
-    #             replacers[line.index(key)] = (key, value)
-
-    # print(line)
-    # return line
 
 
 def solve_part1(fileInfo):
