@@ -1,4 +1,4 @@
-def get_values(fileInfo, part=1):
+def get_values(fileInfo):
     values = {}
 
     with open(fileInfo["file"]) as file:

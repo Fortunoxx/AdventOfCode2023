@@ -12,9 +12,6 @@ def test_part1(day, expected_value=8):
 
 
 @pytest.mark.parametrize("day", [day])
-def test_part2(day, expected_value=2286, has_extra_file=False):
-    suffix = ""
-    if has_extra_file:
-        suffix = "-2"
-    testdata = {"key": "sample", "file": f"test/data/day{day}.sample{suffix}.dat"}
+def test_part2(day, expected_value=2286):
+    testdata = {"key": "sample", "file": f"test/data/day{day}.sample.dat"}
     assert solve_part2(testdata) == expected_value
