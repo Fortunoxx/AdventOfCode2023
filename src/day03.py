@@ -1,4 +1,4 @@
-def get_values(fileInfo):
+def get_values(fileInfo, part2=False):
     data = {}
     symbols = []
 
@@ -17,11 +17,36 @@ def get_values(fileInfo):
                         data[pos] = current
                         current = ""
 
-                if not line[x].isnumeric() and line[x] != ".":
+                if part2:
+                    if line[x] == "*":
+                        symbols.append((x, y))
+                elif not line[x].isnumeric() and line[x] != ".":
                     symbols.append((x, y))
 
             y += 1
     return (data, symbols)
+
+
+def filter2(data, symbols):
+    filtered = {}
+    for d in data:
+        (x, y) = d
+        for xi in range(x-1, x + len(data[d]) + 1):
+            for yi in range(y-1, y+2):
+                pos = (xi, yi)
+                if pos in symbols:
+                    if pos not in filtered:
+                        filtered[pos] = [data[d]]
+                    else:
+                        filtered[pos].append(data[d])
+
+    result = []
+    for f in filtered:
+        items = filtered[f]
+        if len(items) == 2:
+            result.append(int(items[0]) * int(items[1]))
+
+    return result
 
 
 def filter(data, symbols):
@@ -48,4 +73,6 @@ def solve_part1(fileInfo):
 
 
 def solve_part2(fileInfo):
-    return 0
+    (data, symbols) = get_values(fileInfo, True)
+    filtered = filter2(data, symbols)
+    return sum(filtered)
