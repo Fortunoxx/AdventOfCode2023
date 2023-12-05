@@ -32,18 +32,35 @@ def extract(line):
 def apply_mappings(data):
     results = []
     for x in data[0]:  # seeds
-        for i in range(1, 8):  # mappings
-            for m in data[i]:
-                dest = m["dest"]
-                src = m["src"]
-                len = m["len"]
-                if x in range(src, src + len):
-                    offset = x - src
-                    x = dest + offset
-                    break
-        results.append(x)
+        results.append(find_location(x, data))
 
     return results
+
+
+def apply_mappings_part2(data):
+    result = -1
+    seeds = data[0]
+
+    for idx in range(0, len(seeds), 2):
+        for x in range(seeds[idx], seeds[idx] + seeds[idx + 1]):  # seeds
+            l = find_location(x, data)
+            if result > l or result == -1:
+                result = l
+
+    return result
+
+
+def find_location(x, data):
+    for i in range(1, 8):  # mappings
+        for m in data[i]:
+            dest = m["dest"]
+            src = m["src"]
+            len = m["len"]
+            if x in range(src, src + len):
+                offset = x - src
+                x = dest + offset
+                break
+    return x
 
 
 def solve_part1(fileInfo):
@@ -53,4 +70,5 @@ def solve_part1(fileInfo):
 
 
 def solve_part2(fileInfo):
-    return 46
+    data = get_values(fileInfo)
+    return apply_mappings_part2(data)
