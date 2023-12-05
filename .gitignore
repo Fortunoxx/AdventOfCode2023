@@ -1,6 +1,6 @@
 # ignore personalized data
 cookie.txt
-src/data
+src/data/*.dat
 
 # ignore pycache
 __pycache__
