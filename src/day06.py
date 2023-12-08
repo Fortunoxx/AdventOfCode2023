@@ -51,7 +51,7 @@ def solve_time_dist_2(time, dist):
         result = calc_dist(button_press_duration, time_left)
         if result > dist:
             result_counter += 1
-    return [result_counter]
+    return result_counter
 
 
 def calc_dist(speed, time_left):
